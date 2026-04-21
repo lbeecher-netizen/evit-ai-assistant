@@ -9,22 +9,19 @@ export const generateCourseMaterial = async (
   onChunk: (text: string) => void
 ) => {
   const systemInstruction = getSystemInstruction(templateType, program);
-// 1. Read API key using the Vite-specific command
+
+  // 1. Get the key using the Vite-specific syntax
   const apiKey = import.meta.env.VITE_CLAUDE_API_KEY;
 
-  // 2. Check if it exists (using the new name in the error message)
+  // 2. Validate that the key exists
   if (!apiKey) {
-    throw new Error("VITE_CLAUDE_API_KEY environment variable is missing in Amplify");
+    throw new Error("VITE_CLAUDE_API_KEY is missing. Please check your Amplify Environment Variables.");
   }
 
+  // 3. Initialize the Anthropic client
   const anthropic = new Anthropic({ 
     apiKey,
     dangerouslyAllowBrowser: true, 
-  });
-
-  const anthropic = new Anthropic({ 
-    apiKey,
-    dangerouslyAllowBrowser: true, // Required to call Anthropic directly from the browser
   });
 
   let moduleInstruction = "";
@@ -46,7 +43,7 @@ export const generateCourseMaterial = async (
     // Loop up to 3 times to handle long outputs that hit the max_tokens limit
     for (let i = 0; i < 3; i++) {
       const stream = await anthropic.messages.stream({
-        model: "claude-sonnet-4-6",
+        model: "claude-3-5-sonnet-20240620", // Standard stable model name
         max_tokens: 8192,
         system: systemInstruction,
         messages: currentMessages,
