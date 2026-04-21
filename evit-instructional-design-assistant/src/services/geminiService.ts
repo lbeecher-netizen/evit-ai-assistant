@@ -9,12 +9,18 @@ export const generateCourseMaterial = async (
   onChunk: (text: string) => void
 ) => {
   const systemInstruction = getSystemInstruction(templateType, program);
+// 1. Read API key using the Vite-specific command
+  const apiKey = import.meta.env.VITE_CLAUDE_API_KEY;
 
-  // Read API key from the defined environment variable (setup in vite.config.ts)
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  // 2. Check if it exists (using the new name in the error message)
   if (!apiKey) {
-    throw new Error("ANTHROPIC_API_KEY environment variable is required");
+    throw new Error("VITE_CLAUDE_API_KEY environment variable is missing in Amplify");
   }
+
+  const anthropic = new Anthropic({ 
+    apiKey,
+    dangerouslyAllowBrowser: true, 
+  });
 
   const anthropic = new Anthropic({ 
     apiKey,
