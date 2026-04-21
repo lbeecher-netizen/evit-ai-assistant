@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  .markdown-body {
+    @apply text-[#141414] leading-[1.5] font-sans;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+  }
+  .markdown-body h1 {
+    @apply text-[24pt] font-sans font-bold mb-6 mt-8 text-black;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.2;
+  }
+  .markdown-body h2 {
+    @apply text-[18pt] font-sans font-bold mt-8 mb-4 text-black;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.2;
+  }
+  .markdown-body h3 {
+    @apply text-[14pt] font-sans font-bold mt-6 mb-3 text-black;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.2;
+  }
+  .markdown-body p {
+    @apply mb-[12pt];
+  }
+  .markdown-body ul {
+    @apply list-disc pl-[0.5in] mb-[12pt] space-y-1;
+  }
+  .markdown-body ol {
+    @apply list-decimal pl-[0.5in] mb-[12pt] space-y-1;
+  }
+  .markdown-body li {
+    @apply pl-2;
+  }
+  .markdown-body table {
+    @apply w-full border-collapse border border-black mb-6 text-[10pt];
+    table-layout: fixed;
+  }
+  .markdown-body th {
+    @apply bg-gray-50 border border-black p-4 text-left font-bold text-black;
+  }
+  .markdown-body td {
+    @apply border border-black p-4 align-top break-words;
+  }
+  .markdown-body strong {
+    @apply font-bold;
+  }
+  .markdown-body em {
+    @apply italic;
+  }
+  .markdown-body blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic text-gray-700 mb-4;
+  }
+}
